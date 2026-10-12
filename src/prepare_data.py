@@ -62,12 +62,10 @@ def transform(
     keep = df["offer"].isin(["No Offer", treated_label])
     df = df.loc[keep].copy()
 
-    # The treatment indicator: 1 = selected offer, 0 = no offer.
     df["treatment"] = (
         df["offer"] == treated_label
     ).astype(int)
 
-    # Binary outcome: 1 = conversion, 0 = no conversion.
     df["outcome"] = pd.to_numeric(
         df["conversion"], errors="raise"
     )
@@ -75,7 +73,6 @@ def transform(
     if not df["outcome"].isin([0, 1]).all():
         raise ValueError("conversion must contain only 0 and 1")
 
-    # Features must exclude treatment and outcome columns.
     feature_cols = [
         "recency",
         "history",
