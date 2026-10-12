@@ -83,14 +83,12 @@ def transform(
 
     X = df[feature_cols].rename(columns=RENAME)
 
-    # Encode categorical features for ML models.
     X = pd.get_dummies(
         X,
         columns=["area_type", "purchase_channel"],
         dtype=int,
     )
 
-    # Handle missing and infinite numeric values.
     X = X.replace([float("inf"), float("-inf")], float("nan"))
 
     for col in X.columns:
