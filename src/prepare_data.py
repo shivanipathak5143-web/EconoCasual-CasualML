@@ -40,7 +40,6 @@ def transform(
 
     df = data.copy()
 
-    # Validate the observed treatment labels.
     df["offer"] = df["offer"].astype(str).str.strip()
 
     known = {"No Offer", "Discount", "Buy One Get One"}
@@ -51,7 +50,6 @@ def transform(
             f"Unexpected offer labels: {sorted(unexpected)}"
         )
 
-    # Select one treatment group and the control group.
     if arm == "discount":
         treated_label = "Discount"
     elif arm == "bogo":
