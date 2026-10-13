@@ -42,3 +42,11 @@ def predict_ite(est, df: pd.DataFrame) -> np.ndarray:
 
 def ate_linear_dml(df: pd.DataFrame, seed: int = 0) -> float:
     return float(np.mean(predict_ite(fit_linear_dml(df, seed), df)))
+
+def save_ite_scores(df: pd.DataFrame, ite: np.ndarray, path: str = "data/ite_scores.csv") -> pd.DataFrame:
+    out = df[[ID]].copy()
+    out["ite"] = ite
+    for c in DISPLAY_COLS:
+        out[c] = df[c].to_numpy()
+    out.to_csv(path, index=False)
+    return out
