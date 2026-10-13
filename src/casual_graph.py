@@ -18,3 +18,6 @@ def identify_and_estimate(model: CausalModel):
     identified = model.identify_effect(proceed_when_unidentifiable=True)
     estimate = model.estimate_effect(identified, method_name="backdoor.linear_regression")
     return identified, estimate
+
+def naive_difference(df: pd.DataFrame) -> float:
+    return float(df[df[TREATMENT] == 1][OUTCOME].mean() - df[df[TREATMENT] == 0][OUTCOME].mean())
