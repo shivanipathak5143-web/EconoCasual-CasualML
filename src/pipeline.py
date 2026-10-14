@@ -35,3 +35,9 @@ def run_pipeline(data_path:str="data/data.csv",optimizer:Optional[Optimizer]=Non
     ite_df=save_ite_scores(df,ite,save_ite_path) if save_ite_path else \
         df[['customer_id']].assign(ite=ite)
     return run_allocation(ite_df,optimizer,budget,discount_amout)
+
+if __name__=="__main__":
+    alloc=run_pipeline()
+    alloc.to_csv('data/allocation.csv',index=False)
+    print(alloc.segment.value_counts())
+    print(f"Total expected gan: {alloc.expected_gain.sum():,.2f}")
