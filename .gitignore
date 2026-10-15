@@ -7,4 +7,4 @@ node_modules/
 .env
 .DS_Store
 data/data.csv
-data/retaril_campaign.csv
+data/retail_campaign.csv
